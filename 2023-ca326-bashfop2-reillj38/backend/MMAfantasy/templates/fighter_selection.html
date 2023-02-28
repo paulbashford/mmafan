@@ -1,0 +1,121 @@
+{% if messg %}
+<script>
+    alert('{{ messg }}');
+</script>
+{% endif %}
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(#353535b3, #303030b3), url('static/images/bg.jpg');
+            background-size: cover;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: transparent;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--srColor);
+            color: black;
+        }
+        
+        tr:nth-child(even) {
+            background-color: transparent;
+        }
+        
+        main .container .t-center h1 {
+            color: white;
+            padding: 50px 0 20px 0;
+        }
+        .my-table {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+
+p {
+  color: white;
+  font-weight: bold;
+}
+a#choosefighters {
+  color: white;
+  font-weight: bold;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="left">
+                <div class="logo-container">
+                  <img src="{% static 'images/misc.png' %}" alt="log">
+                </div>
+                <h1>UFC fantasy league</h1>
+            </div>
+            <div class="right">
+                <nav>
+                    {% if request.session.email %}
+                    <p>Logged in as {{ request.session.email }}</p>
+                    <a href="{% url 'logout' %}">Logout</a> {% else %}
+                    <p>You're not logged in</p>
+                    <a href="{% url 'signIn' %}">Sign In</a> {% endif %}
+                </nav>
+                <a class="get-start-btn" href="home">Home</a>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+            <div class="t-center">
+                <h1>Fighters Selected</h1>
+                {% if fighters_selected %}
+            </div>
+            <table class="my-table">
+              <tr>
+                <th>Fight</th>
+                <th>Fighter Selection</th>
+              </tr>
+              {% for fight, fighter in fighters_selected.items %}
+                <tr>
+                  <td>{{ fight }}</td>
+                  <td>{{ fighter }}</td>
+                </tr>
+              {% endfor %}
+            </table><br>
+            <a href="/choosefighters" id="choosefighters">CLICK HERE TO CHANGE FIGHTERS</a>
+{% else %}
+   <br> <a href="/choosefighters" id="choosefighters">No fighter selection found. Click here to choose your fighters!</a>
+{% endif %}
+        </div>
+    </main>
+    <script src="{% static 'js.js' %}"></script>
+</body>
+
+</html>

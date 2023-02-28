@@ -1,0 +1,129 @@
+{% if messg %}
+<script>
+    alert('{{ messg }}');
+</script>
+{% endif %}
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <style>
+        body {
+            height: 100vh;
+            background: linear-gradient(#353535b3, #303030b3), url('static/images/bg.jpg');
+            background-size: cover;
+            display: grid;
+            grid-template-rows: auto 1fr;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--srColor);
+            color: black;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        main .container .t-center h1 {
+            color: white;
+            padding: 50px 0 20px 0;
+        }
+        .my-table {
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="left">
+                <div class="logo-container">
+                  <img src="{% static 'images/misc.png' %}" alt="log">
+                </div>
+                <h1>UFC fantasy league</h1>
+            </div>
+            <div class="right">
+                <nav>
+                    {% if request.session.email %}
+                    <p>Logged in as {{ request.session.email }}</p>
+                    <a href="{% url 'logout' %}">Logout</a> {% else %}
+                    <p>You're not logged in</p>
+                    <a href="{% url 'signIn' %}">Sign In</a> {% endif %}
+                </nav>
+                <a class="get-start-btn" href="home">Home</a>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+            <div class="t-center">
+                <h1>Points Earned</h1>
+            </div>
+            <table class="my-table">
+                <thead>
+                    <tr>
+                        <th>Andrade vs. Blanchfield</th>
+                        <th>Wright vs. Pauga</th>
+                        <th>Parisian vs. Pogues</th>
+                        <th>Knight vs. Prachnio</th>
+                        <th>Miller vs. Hernandez</th>
+                        <th>Sadykhov vs. Elder</th>
+                        <th>Lansberg vs. Silva</th>
+                        <th>Emmers vs. Askhabov</th>
+                        <th>OSP vs. Lins</th>
+                        <th>Fletcher vs. Gorimbo</th>
+                        <th>Carpenter vs. Ronderos</th>
+                        <th>Total Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{firstfight}}</td>
+                        <td>{{secondfight}}</td>
+                        <td>{{thirdfight}}</td>
+                        <td>{{fourthfight}}</td>
+                        <td>{{fifthfight}}</td>
+                        <td>{{sixthfight}}</td>
+                        <td>{{seventhfight}}</td>
+                        <td>{{eightfight}}</td>
+                        <td>{{ninthfight}}</td>
+                        <td>{{tenthfight}}</td>
+                        <td>{{eleventhfight}}</td>
+                        <td>{{total_points}}</td>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script src="{% static 'js.js' %}"></script>
+</body>
+
+</html>

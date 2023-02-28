@@ -1,0 +1,222 @@
+{% if messg %}
+<script>
+    alert('{{ messg }}');
+</script>
+{% endif %}
+
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chFighter.css'%}">
+
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="left">
+                <div class="logo-container">
+                  <img src="{% static 'images/choosefighter.png' %}" alt="log">
+                </div>
+                <h1>UFC fantasy league</h1>
+            </div>
+            <div class="right">
+                <nav>
+                    {% if request.session.email %}
+                    <p>Logged in as {{ request.session.email }}</p>
+                    <a href="{% url 'logout' %}">Logout</a> {% else %}
+                    <p>You're not logged in</p>
+                    <a href="{% url 'signIn' %}">Sign In</a> {% endif %}
+                </nav>
+                <a class="get-start-btn" href="home">Home</a>
+            </div>
+        </div>
+    </div>
+    <main>
+        <div class="container">
+            <div class="content">
+                {% block content %}{% endblock %}
+            </div>
+            <br><br>
+            <div class="t-center">
+                <h1>UFC Fight Night Andradre v Blanchfield</h1>
+            </div>
+            <form method="post" action="{% url 'save_choices' %}"> 
+                {% csrf_token %}
+                <div class="wrapper">
+                    <div class="boxes-container">
+                        <h1>Main Card</h1>
+                        <div class="inner-container">
+                            <div class="box">
+                                <h2>Andradre v Blanchfield</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="andradre-blanchfield" value="Jessica Andradre">
+                                        <label for="Jessica Andradre">Jessica Andradre</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="andradre-blanchfield" value="Erin Blanchfield">
+                                        <label for="Erin Blanchfield">Erin Blanchfield</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Wright v Pauga</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="wright-pauga" value="Jordan Wright">
+                                        <label for="Jordan Wright">Jordan Wright</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="wright-pauga" value="Zac Pauga">
+                                        <label for="Zac Pauga">Zac Pauga</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Parisisn v Pogues</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="parisian-pogues" value="Josh Parisian">
+                                        <label for="Josh Parisian">Josh Parisian</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="parisian-pogues" value="Jamal Pogues">
+                                        <label for="Jamal Pogues">Jamal Pogues</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Knight v Prachnio</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="knight-prachnio" value="William Knight">
+                                        <label for="William Knight">William Knight</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="knight-prachnio" value="Marcin Prachnio">
+                                        <label for="Marcin Prachnio">Marcin Prachnio</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Miller v Hernandez</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="miller-hernandez" value="Jim Miller">
+                                        <label for="Jim Miller">Jim Miller</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="miller-hernandez" value="Alexander Hernandez">
+                                        <label for="Alexander Hernandez">Alexander Hernandez</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxes-container">
+                        <h1>Preliminary Card</h1>
+                        <div class="inner-container">
+                            <div class="box">
+                                <h2>Sadykhov v Elder</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="sadykhov-elder" value="Nazim Sadykhov">
+                                        <label for="Nazim Sadykhov">Nazim Sadykhov</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="sadykhov-elder" value="Evan Elder">
+                                        <label for="Evan Elder">Evan Elder</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Lansberg v Silva</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="wlansberg-silva" value="Lina Lansberg">
+                                        <label for="Lina Lansberg">Lina Lansberg</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="wlansberg-silva" value="Mayra Bueno Silva">
+                                        <label for="Mayra Bueno Silva">Mayra Bueno Silva</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Emmers v Askhabov</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="emmers-askhabov" value="Jamall Emmers">
+                                        <label for="Jamall Emmers">Jamall Emmers</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="emmers-askhabov" value="Khusein Askhabov">
+                                        <label for="Khusein Askhabov">Khusein Askhabov</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Preux v Lins</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="preux-lins" value="Ovince Saint Preux">
+                                        <label for="Ovince Saint Preux">Ovince Saint Preux</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="preux-lins" value="Philipe Lins">
+                                        <label for="Philipe Lins">Philipe Lins</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Fletcher v Gorimbo</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="fletcher-gorimbo" value="AJ Fletcher">
+                                        <label for="AJ Fletcher">AJ Fletcher</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="fletcher-gorimbo" value="Themba Gorimbo">
+                                        <label for="Themba Gorimbo">Themba Gorimbo</label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="box">
+                                <h2>Carpenter v Ronderos</h2>
+                                <ul>
+                                    <li>
+                                        <input type="radio" name="carpenter-ronderos" value="Clayton Carpenter">
+                                        <label for="Clayton Carpenter">Clayton Carpenter</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="carpenter-ronderos" value="Juancamilo Ronderos">
+                                        <label for="Juancamilo Ronderos">Juancamilo Ronderos</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="t-center">
+                    <input type="submit" value="Save Choices">
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="{% static 'js.js' %}"></script>
+</body>
+
+</html>
